@@ -21,6 +21,8 @@ public class QSConstants {
         public static final String TILE_AIRPLANE = "toggleAirplane";
         public static final String TILE_TORCH = "toggleFlashlight";  // Keep old string for compatibility
         public static final String TILE_SLEEP = "toggleSleepMode";
+        public static final String TILE_POWER = "togglePower";
+        public static final String TILE_ADB = "toggleADB";
         public static final String TILE_LTE = "toggleLte";
         public static final String TILE_WIMAX = "toggleWimax";
         public static final String TILE_PROFILE = "toggleProfile";
