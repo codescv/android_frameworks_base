@@ -17,20 +17,27 @@ import java.io.DataOutputStream;
 public class PowerTile extends QuickSettingsTile {
 
     private PowerManager pm;
+    private QuickSettingsController mQsc;
 
     public PowerTile(Context context, QuickSettingsController qsc) {
         super(context, qsc);
         pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+        mQsc = qsc;
+
         mOnClick = new OnClickListener() {
             @Override
             public void onClick(View v) {
                 pm.goToSleep(SystemClock.uptimeMillis());
             }
         };
+
         mOnLongClick = new OnLongClickListener() {
 
             @Override
             public boolean onLongClick(View v) {
+
+                // collopase panels to avoid superuser request being hidden
+                mQsc.mBar.collapseAllPanels(true);
 
                 new Thread(new Runnable() {
                     public void run() {
@@ -48,15 +55,12 @@ public class PowerTile extends QuickSettingsTile {
         try {
             Process su = Runtime.getRuntime().exec("su");
             DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
-            System.out.println("start send!");
 
             outputStream.writeBytes("sendevent /dev/input/event0 0001 116 1\n");
             outputStream.flush();
-            System.out.println("sent!");
-
             outputStream.writeBytes("sendevent /dev/input/event0 0000 0000 00000000\n");
             outputStream.flush();
-            outputStream.writeBytes("sleep 2\n");
+            outputStream.writeBytes("sleep 1\n");
             outputStream.flush();
             outputStream.writeBytes("sendevent /dev/input/event0 0001 116 00000000\n");
             outputStream.flush();
@@ -65,16 +69,11 @@ public class PowerTile extends QuickSettingsTile {
             outputStream.writeBytes("exit\n");
             outputStream.flush();
 
-            System.out.println("exit!");
-
             su.waitFor();
         } catch(Exception e){
-            System.out.println("exception!");
             e.printStackTrace();
         }
     }
-
-
 
     @Override
     void onPostCreate() {
