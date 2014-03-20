@@ -88,8 +88,8 @@ public class PowerTile extends QuickSettingsTile {
     }
 
     private synchronized void updateTile() {
-        mDrawable = R.drawable.ic_qs_sleep;
-        mLabel = mContext.getString(R.string.quick_settings_screen_sleep);
+        mDrawable = R.drawable.ic_qs_power;
+        mLabel = mContext.getString(R.string.quick_settings_power);
     }
 
 }

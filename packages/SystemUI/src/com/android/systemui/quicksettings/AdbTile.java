@@ -58,11 +58,11 @@ public class AdbTile extends QuickSettingsTile {
 
     private synchronized void updateTile() {
         if (getEnabled()) {
-            mLabel = mContext.getString(R.string.quick_settings_network_adb_enabled_label);
-            mDrawable = R.drawable.ic_qs_network_adb_on;
+            mLabel = mContext.getString(R.string.quick_settings_adb_enabled_label);
+            mDrawable = R.drawable.ic_qs_adb_on;
         } else {
-            mLabel = mContext.getString(R.string.quick_settings_network_adb_disabled_label);
-            mDrawable = R.drawable.ic_qs_network_adb_off;
+            mLabel = mContext.getString(R.string.quick_settings_adb_disabled_label);
+            mDrawable = R.drawable.ic_qs_adb_off;
         }
     }
 
