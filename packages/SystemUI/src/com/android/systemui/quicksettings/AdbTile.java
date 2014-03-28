@@ -28,8 +28,12 @@ public class AdbTile extends QuickSettingsTile {
         mOnClick = new OnClickListener() {
             @Override
             public void onClick(View v) {
+                // stay awake when adb enabled and plugged in
+                int enabled = getEnabled() ? 0 : 1;
                 Settings.Secure.putInt(mContext.getContentResolver(),
-                        Settings.Global.ADB_ENABLED, getEnabled() ? 0 : 1);
+                        Settings.Secure.ADB_ENABLED, enabled);
+                Settings.Global.putInt(mContext.getContentResolver(),
+                        Settings.Global.STAY_ON_WHILE_PLUGGED_IN, enabled);
             }
         };
 
